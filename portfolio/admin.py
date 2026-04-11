@@ -1,11 +1,13 @@
 from django.contrib import admin
+from .models import Licenciatura, Docente, UnidadeCurricular, Tecnologia, Competencia, Projeto, TFC, Formacao, MakingOf
 
-from django.contrib import admin
-from .models import AreaCientifica, Curso, Disciplina, Projeto, LinguagemProgramacao, Docente
 
-admin.site.register(AreaCientifica)
-admin.site.register(Curso)
-admin.site.register(Disciplina)
-admin.site.register(Projeto)
-admin.site.register(LinguagemProgramacao)
+admin.site.register(Licenciatura)
 admin.site.register(Docente)
+admin.site.register(UnidadeCurricular)
+admin.site.register(Tecnologia)
+admin.site.register(Competencia)
+admin.site.register(Projeto)
+admin.site.register(TFC)
+admin.site.register(Formacao)
+admin.site.register(MakingOf)
