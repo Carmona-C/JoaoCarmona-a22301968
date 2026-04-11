@@ -75,12 +75,19 @@ class Projeto(models.Model):
 
 
 class TFC(models.Model):
-    titulo = models.CharField(max_length=150)
-    autor = models.CharField(max_length=100,blank=True)
-    ano = models.IntegerField(null=True,blank=True)
+    titulo = models.CharField(max_length=200)
+    autor = models.CharField(max_length=150, blank=True)
+    orientador = models.CharField(max_length=150, blank=True)
+    licenciatura = models.CharField(max_length=150, blank=True)
+    ano = models.IntegerField(null=True, blank=True)
     resumo = models.TextField(blank=True)
-    area_cientifica = models.CharField(max_length=100,blank=True)
+    palavras_chave = models.TextField(blank=True)
+    area_cientifica = models.CharField(max_length=150, blank=True)
+    pdf = models.URLField(blank=True)
+    imagem = models.URLField(blank=True)
+    email = models.EmailField(blank=True)
     interesse = models.IntegerField(default=3)
+    tecnologias = models.ManyToManyField(Tecnologia, related_name='tfcs', blank=True)
 
     def __str__(self):
         return f"{self.titulo} - {self.autor} ({self.ano})"
@@ -114,4 +121,4 @@ class MakingOf(models.Model):
 
     
     def __str__(self):
-        return f"{self.titulo} - Projeto: {self.projeto.titulo}" if self.projeto else (f"{self.titulo} - UC: {self.unidade_curricular.nome}" if self.unidade_curricular else f"{self.titulo} ({self.entidade})")
+        return f"{self.titulo} ({self.entidade})"
