@@ -1,0 +1,64 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>TFCs</h2>
+
+<section>
+    {% for tfc in tfcs %}
+    <article>
+        <header>
+            <h3>{{ tfc.titulo }}</h3>
+            <p>Autor: {{ tfc.autor }}</p>
+            <p>Orientador: {{ tfc.orientador }}</p>
+            <p>Licenciatura: {{ tfc.licenciatura }}</p>
+            <p>Ano: {{ tfc.ano }} | Interesse: {{ tfc.interesse }}/5</p>
+        </header>
+
+        <section>
+            <h4>Resumo</h4>
+            <p>{{ tfc.resumo }}</p>
+        </section>
+
+        <section>
+            <h4>Palavras-chave</h4>
+            <p>{{ tfc.palavras_chave }}</p>
+        </section>
+
+        <section>
+            <h4>Área Científica</h4>
+            <p>{{ tfc.area_cientifica }}</p>
+        </section>
+
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tecnologia in tfc.tecnologias.all %}
+                    <li>{{ tecnologia.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Ligações</h4>
+            <ul>
+                {% if tfc.pdf %}
+                    <li><a href="{{ tfc.pdf }}" target="_blank">PDF</a></li>
+                {% endif %}
+                {% if tfc.imagem %}
+                    <li><a href="{{ tfc.imagem }}" target="_blank">Imagem</a></li>
+                {% endif %}
+                {% if tfc.email %}
+                    <li>{{ tfc.email }}</li>
+                {% endif %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <article>
+        <header><h3>Sem TFCs</h3></header>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

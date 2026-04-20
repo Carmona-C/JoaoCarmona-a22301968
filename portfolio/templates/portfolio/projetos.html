@@ -1,0 +1,67 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Projetos</h2>
+
+<section>
+    {% for projeto in projetos %}
+    <article>
+        <header>
+            <h3>{{ projeto.titulo }}</h3>
+            <p>Unidade Curricular: {{ projeto.unidade_curricular.nome }}</p>
+            {% if projeto.imagem %}
+                <img src="{{ projeto.imagem.url }}" alt="Imagem do projeto {{ projeto.titulo }}">
+            {% endif %}
+        </header>
+
+        <section>
+            <h4>Descrição</h4>
+            <p>{{ projeto.descricao }}</p>
+        </section>
+
+        <section>
+            <h4>Conceitos Aplicados</h4>
+            <p>{{ projeto.conceitos_aplicados }}</p>
+        </section>
+
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tecnologia in projeto.tecnologias.all %}
+                    <li>{{ tecnologia.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Competências</h4>
+            <ul>
+                {% for competencia in projeto.competencias.all %}
+                    <li>{{ competencia.nome }}</li>
+                {% empty %}
+                    <li>Sem competências associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Ligações</h4>
+            <ul>
+                {% if projeto.video_demo %}
+                    <li><a href="{{ projeto.video_demo }}" target="_blank">Vídeo Demo</a></li>
+                {% endif %}
+                {% if projeto.github_link %}
+                    <li><a href="{{ projeto.github_link }}" target="_blank">GitHub</a></li>
+                {% endif %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <article>
+        <header><h3>Sem projetos</h3></header>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

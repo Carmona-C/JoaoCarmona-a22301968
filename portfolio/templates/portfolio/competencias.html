@@ -1,0 +1,48 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Competências</h2>
+
+<section>
+    {% for competencia in competencias %}
+    <article>
+        <header>
+            <h3>{{ competencia.nome }}</h3>
+            <p>Tipo: {{ competencia.tipo }}</p>
+            <p>Nível: {{ competencia.nivel }}/5</p>
+        </header>
+
+        <section>
+            <h4>Descrição</h4>
+            <p>{{ competencia.descricao }}</p>
+        </section>
+
+        <section>
+            <h4>Projetos</h4>
+            <ul>
+                {% for projeto in competencia.projetos.all %}
+                    <li>{{ projeto.titulo }}</li>
+                {% empty %}
+                    <li>Sem projetos associados</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Formações</h4>
+            <ul>
+                {% for formacao in competencia.formacoes.all %}
+                    <li>{{ formacao.titulo }}</li>
+                {% empty %}
+                    <li>Sem formações associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <article>
+        <header><h3>Sem competências</h3></header>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

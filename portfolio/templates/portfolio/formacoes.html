@@ -1,0 +1,60 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Formações</h2>
+
+<section>
+    {% for formacao in formacoes %}
+    <article>
+        <header>
+            <h3>{{ formacao.titulo }}</h3>
+            <p>Entidade: {{ formacao.entidade }}</p>
+            <p>Tipo: {{ formacao.tipo }}</p>
+            <p>Início: {{ formacao.data_inicio }} | Fim: {{ formacao.data_fim }}</p>
+        </header>
+
+        <section>
+            <h4>Descrição</h4>
+            <p>{{ formacao.descricao }}</p>
+        </section>
+
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tecnologia in formacao.tecnologias.all %}
+                    <li>{{ tecnologia.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Competências</h4>
+            <ul>
+                {% for competencia in formacao.competencias.all %}
+                    <li>{{ competencia.nome }}</li>
+                {% empty %}
+                    <li>Sem competências associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h4>Certificado</h4>
+            <ul>
+                {% if formacao.link_certificado %}
+                    <li><a href="{{ formacao.link_certificado }}" target="_blank">Ver certificado</a></li>
+                {% else %}
+                    <li>Sem certificado associado</li>
+                {% endif %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <article>
+        <header><h3>Sem formações</h3></header>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

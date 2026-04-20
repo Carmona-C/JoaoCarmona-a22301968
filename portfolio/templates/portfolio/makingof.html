@@ -1,0 +1,48 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Making Of</h2>
+
+<section>
+    {% for makingof in makingofs %}
+    <article>
+        <header>
+            <h3>{{ makingof.titulo }}</h3>
+            <p>Entidade: {{ makingof.entidade }}</p>
+            {% if makingof.trabalho_papel %}
+                <img src="{{ makingof.trabalho_papel.url }}" alt="Trabalho em papel {{ makingof.titulo }}">
+            {% endif %}
+        </header>
+
+        <section>
+            <h4>Decisões</h4>
+            <p>{{ makingof.decisoes }}</p>
+        </section>
+
+        <section>
+            <h4>Erros</h4>
+            <p>{{ makingof.erros }}</p>
+        </section>
+
+        <section>
+            <h4>Correções</h4>
+            <p>{{ makingof.correcoes }}</p>
+        </section>
+
+        <section>
+            <h4>Justificação</h4>
+            <p>{{ makingof.justificacao }}</p>
+        </section>
+
+        <section>
+            <h4>Uso de IA</h4>
+            <p>{{ makingof.uso_ia }}</p>
+        </section>
+    </article>
+    {% empty %}
+    <article>
+        <header><h3>Sem registos de making of</h3></header>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

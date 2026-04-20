@@ -1,0 +1,42 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Licenciaturas</h2>
+
+<section>
+    {% for licenciatura in licenciaturas %}
+    <article>
+        <header>
+            <h3>{{ licenciatura.nome }}</h3>
+            <p>Duração: {{ licenciatura.duracao }} anos</p>
+            <p>ECTS: {{ licenciatura.ects }}</p>
+        </header>
+
+        <section>
+            <h4>Apresentação</h4>
+            <p>{{ licenciatura.apresentacao }}</p>
+        </section>
+
+        <section>
+            <h4>Objetivos</h4>
+            <p>{{ licenciatura.objetivos }}</p>
+        </section>
+
+        <section>
+            <h4>Unidades Curriculares</h4>
+            <ul>
+                {% for uc in licenciatura.unidades_curriculares.all %}
+                    <li>{{ uc.nome }}</li>
+                {% empty %}
+                    <li>Sem unidades curriculares associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <article>
+        <header><h3>Sem licenciaturas</h3></header>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}
