@@ -55,6 +55,7 @@ body > header nav a:hover {
     background: white;
     color: #1d4ed8;
     transform: translateY(-2px);
+    text-decoration: none;
 }
 
 /* MAIN */
@@ -202,6 +203,136 @@ a:hover {
     text-decoration: underline;
 }
 
+/* BOTÕES */
+.btn-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 11px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+    transition: all 0.25s ease;
+    margin-bottom: 22px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(37, 99, 235, 0.35);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-danger {
+    display: inline-block;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    padding: 8px 13px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.25);
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    transform: scale(1.05);
+    color: white;
+    text-decoration: none;
+}
+
+.btn-edit {
+    display: inline-block;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    padding: 8px 13px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+    transition: all 0.2s ease;
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    transform: scale(1.05);
+    color: white;
+    text-decoration: none;
+}
+
+/* HEADER COM AÇÕES */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* FORMULÁRIOS */
+form {
+    display: grid;
+    gap: 14px;
+}
+
+form p {
+    display: grid;
+    gap: 6px;
+}
+
+form label {
+    font-weight: 700;
+    color: #334155;
+}
+
+form input,
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font: inherit;
+    background: white;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+form button {
+    justify-self: start;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: white;
+    padding: 11px 18px;
+    border-radius: 12px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(37, 99, 235, 0.3);
+}
+
 /* FOOTER */
 footer {
     text-align: center;
@@ -232,5 +363,13 @@ footer {
 
     article img {
         max-width: 100%;
+    }
+
+    .card-header {
+        flex-direction: column;
+    }
+
+    .actions {
+        width: 100%;
     }
 }

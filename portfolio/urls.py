@@ -11,4 +11,7 @@ urlpatterns = [
     path('tfcs/', views.tfcs_view, name='tfcs'),
     path('formacoes/', views.formacoes_view, name='formacoes'),
     path('makingof/', views.makingof_view, name='makingof'),
+
+    path('projetos/novo/', views.novo_projeto_view, name='novo_projeto'),
+    path('projetos/apagar/<int:projeto_id>/', views.apagar_projeto_view, name='apagar_projeto'),
 ]

@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Licenciatura, UnidadeCurricular, Projeto, Tecnologia, Competencia, TFC, Formacao, MakingOf
+from .forms import ProjetoForm
+from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 
 
 def licenciaturas_view(request):
@@ -41,3 +44,20 @@ def makingof_view(request):
     makingofs = MakingOf.objects.all()
     return render(request, 'portfolio/makingof.html', {'makingofs': makingofs})
 
+def novo_projeto_view(request):
+    if request.method == 'POST':
+        form = ProjetoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('projetos')
+    else:
+        form = ProjetoForm()
+
+    return render(request, 'criacao/novo_projeto.html', {'form': form})
+
+
+def apagar_projeto_view(request, projeto_id):
+    projeto = get_object_or_404(Projeto, id=projeto_id)
+    projeto.delete()
+    return redirect('projetos')

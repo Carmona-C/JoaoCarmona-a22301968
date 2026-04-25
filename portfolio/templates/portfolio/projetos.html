@@ -2,17 +2,24 @@
 
 {% block content %}
 <h2>Projetos</h2>
-
+<p> <a href="{% url 'novo_projeto' %}" class="btn-primary">+ Novo projeto</a> </p>
 <section>
     {% for projeto in projetos %}
     <article>
-        <header>
-            <h3>{{ projeto.titulo }}</h3>
-            <p>Unidade Curricular: {{ projeto.unidade_curricular.nome }}</p>
-            {% if projeto.imagem %}
-                <img src="{{ projeto.imagem.url }}" alt="Imagem do projeto {{ projeto.titulo }}">
-            {% endif %}
+        <header class="card-header">
+            <div>
+                <h3>{{ projeto.titulo }}</h3>
+                <p>Unidade Curricular: {{ projeto.unidade_curricular.nome }}</p>
+            </div>
+
+            <div class="actions">
+                <a href="{% url 'apagar_projeto' projeto.id %}" class="btn-danger">Apagar</a>
+            </div>
         </header>
+
+        {% if projeto.imagem %}
+            <img src="{{ projeto.imagem.url }}" alt="Imagem do projeto {{ projeto.titulo }}">
+        {% endif %}
 
         <section>
             <h4>Descrição</h4>
@@ -60,7 +67,9 @@
     </article>
     {% empty %}
     <article>
-        <header><h3>Sem projetos</h3></header>
+        <header>
+            <h3>Sem projetos</h3>
+        </header>
     </article>
     {% endfor %}
 </section>
