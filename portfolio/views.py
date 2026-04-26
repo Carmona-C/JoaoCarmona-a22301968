@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Licenciatura, UnidadeCurricular, Projeto, Tecnologia, Competencia, TFC, Formacao, MakingOf
 from .forms import ProjetoForm
+from .forms import TecnologiaForm
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404, redirect
 
@@ -56,8 +57,54 @@ def novo_projeto_view(request):
 
     return render(request, 'criacao/novo_projeto.html', {'form': form})
 
+def editar_projeto_view(request, projeto_id):
+    projeto = get_object_or_404(Projeto, id=projeto_id)
+
+    if request.method == 'POST':
+        form = ProjetoForm(request.POST, request.FILES, instance=projeto)
+
+        if form.is_valid():
+            form.save()
+            return redirect('projetos')
+    else:
+        form = ProjetoForm(instance=projeto)
+
+    return render(request, 'criacao/editar_projeto.html', {'form': form, 'projeto': projeto})
+
 
 def apagar_projeto_view(request, projeto_id):
     projeto = get_object_or_404(Projeto, id=projeto_id)
     projeto.delete()
     return redirect('projetos')
+
+
+def nova_tecnologia_view(request):
+    if request.method == 'POST':
+        form = TecnologiaForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('tecnologias')
+    else:
+        form = TecnologiaForm()
+
+    return render(request, 'criacao/nova_tecnologia.html', {'form': form})
+
+def editar_tecnologia_view(request, tecnologia_id):
+    tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
+
+    if request.method == 'POST':
+        form = TecnologiaForm(request.POST, request.FILES, instance=tecnologia)
+
+        if form.is_valid():
+            form.save()
+            return redirect('tecnologias')
+    else:
+        form = TecnologiaForm(instance=tecnologia)
+
+    return render(request, 'criacao/editar_tecnologia.html', {'form': form, 'tecnologia': tecnologia})
+
+def apagar_tecnologia_view(request, tecnologia_id):
+    tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
+    tecnologia.delete()
+    return redirect('tecnologias')
