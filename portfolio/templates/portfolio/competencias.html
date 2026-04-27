@@ -2,14 +2,22 @@
 
 {% block content %}
 <h2>Competências</h2>
+<p> <a href="{% url 'nova_competencia' %}" class="btn-primary">+ Nova Competência</a> </p>
 
 <section>
     {% for competencia in competencias %}
     <article>
-        <header>
+         <header class="card-header">
+            <div>
             <h3>{{ competencia.nome }}</h3>
             <p>Tipo: {{ competencia.tipo }}</p>
             <p>Nível: {{ competencia.nivel }}/5</p>
+            </div>
+
+            <div class="actions">
+                <a href="{% url 'editar_competencia' competencia.id %}" class="btn-edit">Editar</a>
+                <a href="{% url 'apagar_competencia' competencia.id %}" class="btn-danger">Apagar</a>
+            </div>
         </header>
 
         <section>

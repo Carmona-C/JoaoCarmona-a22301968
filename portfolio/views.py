@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import Licenciatura, UnidadeCurricular, Projeto, Tecnologia, Competencia, TFC, Formacao, MakingOf
 from .forms import ProjetoForm
 from .forms import TecnologiaForm
+from .forms import CompetenciaForm
+from .forms import FormacaoForm
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404, redirect
 
@@ -108,3 +110,67 @@ def apagar_tecnologia_view(request, tecnologia_id):
     tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
     tecnologia.delete()
     return redirect('tecnologias')
+
+
+def nova_competencia_view(request):
+    if request.method == 'POST':
+        form = CompetenciaForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('competencias')
+    else:
+        form = CompetenciaForm()
+
+    return render(request, 'criacao/nova_competencia.html', {'form': form})
+
+def editar_competencia_view(request, competencia_id):
+    competencia = get_object_or_404(Competencia, id=competencia_id)
+
+    if request.method == 'POST':
+        form = CompetenciaForm(request.POST, request.FILES, instance=competencia)
+
+        if form.is_valid():
+            form.save()
+            return redirect('competencias')
+    else:
+        form = CompetenciaForm(instance=competencia)
+
+    return render(request, 'criacao/editar_competencia.html', {'form': form, 'competencia': competencia})
+
+def apagar_competencia_view(request, competencia_id):
+    competencia = get_object_or_404(Competencia, id=competencia_id)
+    competencia.delete()
+    return redirect('competencias')
+
+
+def nova_formacao_view(request):
+    if request.method == 'POST':
+        form = FormacaoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('formacoes')
+    else:
+        form = FormacaoForm()
+
+    return render(request, 'criacao/nova_formacao.html', {'form': form})
+
+
+def editar_formacao_view(request, formacao_id):
+    formacao = get_object_or_404(Formacao, id=formacao_id)
+
+    if request.method == 'POST':
+        form = FormacaoForm(request.POST, instance=formacao)
+        if form.is_valid():
+            form.save()
+            return redirect('formacoes')
+    else:
+        form = FormacaoForm(instance=formacao)
+
+    return render(request, 'criacao/editar_formacao.html', {'form': form, 'formacao': formacao})
+
+
+def apagar_formacao_view(request, formacao_id):
+    formacao = get_object_or_404(Formacao, id=formacao_id)
+    formacao.delete()
+    return redirect('formacoes')
