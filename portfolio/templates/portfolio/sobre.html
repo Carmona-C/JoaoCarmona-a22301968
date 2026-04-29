@@ -1,0 +1,175 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Sobre esta Aplicação</h2>
+
+<section>
+    <article>
+        <header>
+            <h3>Arquitetura MVT do Django</h3>
+        </header>
+
+        <p>
+            Esta aplicação foi desenvolvida com Django e segue a arquitetura MVT:
+            Model, View e Template.
+        </p>
+
+        <section>
+            <h4>Componentes</h4>
+            <p>
+                O <strong>Model</strong> representa os dados da aplicação e define as
+                tabelas da base de dados. Nesta aplicação, exemplos de models são
+                Projeto, Tecnologia, UnidadeCurricular, Competencia e Formacao.
+            </p>
+
+            <p>
+                A <strong>View</strong> recebe o pedido do utilizador, consulta a base
+                de dados através dos models e envia os dados para o template.
+            </p>
+
+            <p>
+                O <strong>Template</strong> é responsável por apresentar os dados em
+                HTML, criando as páginas visíveis no navegador.
+            </p>
+        </section>
+
+        <section>
+            <h4>Fluxo de informação</h4>
+            <p>
+                O utilizador acede a uma URL. O Django procura essa rota no ficheiro
+                urls.py e chama a view correspondente. A view recolhe os dados nos
+                models e envia-os para o template, que gera a página HTML apresentada
+                no browser.
+            </p>
+        </section>
+
+        <section>
+            <h4>Desenho da arquitetura MVT</h4>
+            <img src="/media/sobre/mvt.jpg" alt="Desenho da arquitetura MVT">
+        </section>
+    </article>
+
+    <article>
+        <header>
+            <h3>Modelação</h3>
+        </header>
+
+        <p>
+            A modelação da aplicação foi construída para representar o meu percurso
+            académico, os projetos desenvolvidos, as tecnologias utilizadas, as
+            competências adquiridas, formações, TFCs e o processo de desenvolvimento.
+        </p>
+
+        <section>
+            <h4>Diagrama Entidade-Relação em papel</h4>
+            <img src="/media/sobre/der.jpg" alt="Diagrama entidade relação">
+        </section>
+
+        <section>
+            <h4>Exemplo de relação no models.py</h4>
+
+<pre><code>class Projeto(models.Model):
+    unidade_curricular = models.ForeignKey(UnidadeCurricular,on_delete=models.CASCADE,related_name='projetos',null=True,blank=True)
+    titulo = models.CharField(max_length=100,blank=True,default='')
+    descricao = models.TextField(blank=True)
+    tecnologias = models.ManyToManyField(Tecnologia,related_name='projetos',blank=True)
+
+class Tecnologia(models.Model):
+    nome = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=20,choices=TIPO_CHOICES,default='outra')</code></pre>
+
+            <p>
+                Esta relação entre Projeto e Tecnologia é do tipo muitos-para-muitos,
+                porque um projeto pode usar várias tecnologias e uma tecnologia pode
+                estar presente em vários projetos.
+            </p>
+        </section>
+    </article>
+
+    <article>
+        <header>
+            <h3>Tecnologias utilizadas</h3>
+        </header>
+
+        <p>
+            Nesta aplicação foram usadas várias tecnologias para desenvolver o frontend,
+            backend, base de dados, controlo de versões e ambiente de desenvolvimento.
+        </p>
+
+        <section>
+            <h4>Tecnologias registadas</h4>
+            <ul>
+                {% for tecnologia in tecnologias %}
+                    <li>{{ tecnologia.nome }} - {{ tecnologia.tipo }}</li>
+                {% empty %}
+                    <li>Ainda não existem tecnologias registadas.</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <p>
+            Exemplos de tecnologias usadas nesta aplicação incluem Django, HTML, CSS,
+            SQLite, Git, GitHub e GitHub Codespaces.
+        </p>
+    </article>
+
+    <article>
+        <header>
+            <h3>Estrutura das páginas</h3>
+        </header>
+
+        <p>
+            A navegação da aplicação está organizada em várias páginas principais:
+            página inicial, licenciaturas, unidades curriculares, projetos, tecnologias,
+            competências, TFCs, formações, making-of e sobre esta aplicação.
+        </p>
+
+        <section>
+            <h4>Mapa de navegação</h4>
+            <img src="/media/sobre/mapa_navegacao.jpg" alt="Mapa de navegação da aplicação">
+        </section>
+    </article>
+
+    <article>
+        <header>
+            <h3>Repositório GitHub</h3>
+        </header>
+
+        <p>
+            O GitHub foi utilizado para guardar o código da aplicação e acompanhar a
+            evolução do projeto através de commits. Esta ferramenta permite manter um
+            histórico das alterações, recuperar versões anteriores e desenvolver o
+            projeto de forma mais organizada.
+        </p>
+
+        <p></a><br>
+            <a href="https://github.com/Carmona-C/JoaoCarmona-a22301968" target="_blank" class="btn-primary">
+                Ver repositório GitHub
+            </a>
+        </p>
+    </article>
+
+    <article>
+        <header>
+            <h3>Making-Of</h3>
+        </header>
+
+        <p>
+            O Making-Of reúne registos sobre o processo de desenvolvimento da aplicação,
+            incluindo decisões tomadas, erros encontrados, correções realizadas,
+            justificações de modelação, uso de IA e evidências do trabalho feito em papel.
+        </p>
+
+        <section>
+            <h4>Registos recolhidos</h4>
+            <ul>
+                {% for item in makingofs %}
+                    <li>{{ item.titulo }} - {{ item.entidade }}</li>
+                {% empty %}
+                    <li>Ainda não existem registos de Making-Of.</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+</section>
+{% endblock %}

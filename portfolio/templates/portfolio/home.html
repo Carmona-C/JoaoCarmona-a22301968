@@ -1,0 +1,25 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<section class="hero">
+    <article class="hero-card">
+        <section class="hero-text">
+            <h2>Bem-vindo ao meu Portfolio</h2>
+
+            <p>
+                <p class="home-description">
+                    Olá, sou o João Carmona, estudante de Informática de Gestão, e este portfólio representa o trabalho que desenvolvi ao longo da unidade curricular de Programação Web. Ao longo deste percurso fui explorando diferentes tecnologias e consolidando conhecimentos na área do desenvolvimento web, bases de dados e organização de aplicações.</a><br>
+
+                    Um dos momentos mais marcantes deste caminho foi a conclusão do meu Trabalho Final de Curso (TFC), onde tive a oportunidade de aplicar, de forma integrada, várias das competências adquiridas. Neste projeto trabalhei conceitos como análise de dados e inteligência artificial, com o objetivo de desenvolver uma solução com impacto real.
+            </p>
+            <div class="home-actions">
+                <a href="{% url 'tfc_detail' 46 %}" class="btn-primary">TFC - Ares do Pinhal</a>
+            </div>
+        </section>
+
+        <section class="hero-photo">
+            <img src="/media/sobre/joao.jpeg" alt="Fotografia de João Carmona">
+        </section>
+    </article>
+</section>
+{% endblock %}

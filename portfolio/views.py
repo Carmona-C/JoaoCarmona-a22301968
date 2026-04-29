@@ -8,6 +8,23 @@ from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404, redirect
 
 
+def home_view(request):
+    return render(request, 'portfolio/home.html')
+
+def sobre_view(request):
+    tecnologias = Tecnologia.objects.all()
+    makingofs = MakingOf.objects.all()
+
+    return render(request, 'portfolio/sobre.html', {
+        'tecnologias': tecnologias,
+        'makingofs': makingofs,
+    })
+
+def tfc_detail_view(request, tfc_id):
+    tfc = get_object_or_404(TFC, id=tfc_id)
+    return render(request, 'portfolio/tfc_detail.html', {'tfc': tfc})
+
+
 def licenciaturas_view(request):
     licenciaturas = Licenciatura.objects.prefetch_related('unidades_curriculares').all()
     return render(request, 'portfolio/licenciaturas.html', {'licenciaturas': licenciaturas})

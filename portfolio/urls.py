@@ -3,8 +3,9 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.licenciaturas_view),  # homepage
+    path('', views.home_view, name='home'),  # homepage
     path('licenciaturas/', views.licenciaturas_view, name='licenciaturas'),
+    path('tfcs/<int:tfc_id>/', views.tfc_detail_view, name='tfc_detail'),
     path('ucs/', views.ucs_view, name='ucs'),
     path('projetos/', views.projetos_view, name='projetos'),
     path('tecnologias/', views.tecnologias_view, name='tecnologias'),
@@ -12,6 +13,7 @@ urlpatterns = [
     path('tfcs/', views.tfcs_view, name='tfcs'),
     path('formacoes/', views.formacoes_view, name='formacoes'),
     path('makingof/', views.makingof_view, name='makingof'),
+    path('sobre/', views.sobre_view, name='sobre'),
 
     path('projetos/novo/', views.novo_projeto_view, name='novo_projeto'),
     path('projetos/editar/<int:projeto_id>/', views.editar_projeto_view, name='editar_projeto'),
