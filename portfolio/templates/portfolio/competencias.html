@@ -2,7 +2,9 @@
 
 {% block content %}
 <h2>Competências</h2>
-<p> <a href="{% url 'nova_competencia' %}" class="btn-primary">+ Nova Competência</a> </p>
+{% if request.user.is_authenticated %}
+    <p> <a href="{% url 'nova_competencia' %}" class="btn-primary">+ Nova Competência</a> </p>
+{% endif %}
 
 <section>
     {% for competencia in competencias %}
@@ -15,8 +17,10 @@
             </div>
 
             <div class="actions">
+            {% if request.user.is_authenticated %}
                 <a href="{% url 'editar_competencia' competencia.id %}" class="btn-edit">Editar</a>
                 <a href="{% url 'apagar_competencia' competencia.id %}" class="btn-danger">Apagar</a>
+            {% endif %}
             </div>
         </header>
 

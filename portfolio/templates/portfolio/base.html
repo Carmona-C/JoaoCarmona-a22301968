@@ -21,6 +21,24 @@
             <a href="{% url 'tfcs' %}">TFCs</a>
             <a href="{% url 'formacoes' %}">Formações</a>
             <a href="{% url 'makingof' %}">Making Of</a>
+
+            {% if request.user.is_authenticated %}
+                <div class="auth-box">
+                    <span>Olá, {{ request.user.username }}</span>
+
+                    <a href="{% url 'user' %}" class="btn-user">
+                    Conta
+                    </a>
+
+                    <a href="{% url 'logout' %}" class="btn-logout">
+                    Logout
+                    </a>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn-login">
+                Login
+                </a>
+            {% endif %}
         </nav>
     </header>
 

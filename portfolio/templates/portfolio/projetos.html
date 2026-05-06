@@ -2,7 +2,9 @@
 
 {% block content %}
 <h2>Projetos</h2>
-<p> <a href="{% url 'novo_projeto' %}" class="btn-primary">+ Novo projeto</a> </p>
+{% if request.user.is_authenticated %}
+    <p><a href="{% url 'novo_projeto' %}" class="btn-primary">+ Novo projeto</a></p>
+{% endif %}
 <section>
     {% for projeto in projetos %}
     <article>
@@ -13,8 +15,10 @@
             </div>
 
             <div class="actions">
+            {% if request.user.is_authenticated %}
                 <a href="{% url 'editar_projeto' projeto.id %}" class="btn-edit">Editar</a>
                 <a href="{% url 'apagar_projeto' projeto.id %}" class="btn-danger">Apagar</a>
+            {% endif %}
             </div>
         </header>
 

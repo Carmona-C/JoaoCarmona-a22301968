@@ -6,6 +6,8 @@ from .forms import CompetenciaForm
 from .forms import FormacaoForm
 from django.shortcuts import redirect
 from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def home_view(request):
@@ -64,6 +66,7 @@ def makingof_view(request):
     makingofs = MakingOf.objects.all()
     return render(request, 'portfolio/makingof.html', {'makingofs': makingofs})
 
+@login_required
 def novo_projeto_view(request):
     if request.method == 'POST':
         form = ProjetoForm(request.POST, request.FILES)
@@ -76,6 +79,7 @@ def novo_projeto_view(request):
 
     return render(request, 'criacao/novo_projeto.html', {'form': form})
 
+@login_required
 def editar_projeto_view(request, projeto_id):
     projeto = get_object_or_404(Projeto, id=projeto_id)
 
@@ -90,13 +94,13 @@ def editar_projeto_view(request, projeto_id):
 
     return render(request, 'criacao/editar_projeto.html', {'form': form, 'projeto': projeto})
 
-
+@login_required
 def apagar_projeto_view(request, projeto_id):
     projeto = get_object_or_404(Projeto, id=projeto_id)
     projeto.delete()
     return redirect('projetos')
 
-
+@login_required
 def nova_tecnologia_view(request):
     if request.method == 'POST':
         form = TecnologiaForm(request.POST, request.FILES)
@@ -109,6 +113,7 @@ def nova_tecnologia_view(request):
 
     return render(request, 'criacao/nova_tecnologia.html', {'form': form})
 
+@login_required
 def editar_tecnologia_view(request, tecnologia_id):
     tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
 
@@ -123,12 +128,13 @@ def editar_tecnologia_view(request, tecnologia_id):
 
     return render(request, 'criacao/editar_tecnologia.html', {'form': form, 'tecnologia': tecnologia})
 
+@login_required
 def apagar_tecnologia_view(request, tecnologia_id):
     tecnologia = get_object_or_404(Tecnologia, id=tecnologia_id)
     tecnologia.delete()
     return redirect('tecnologias')
 
-
+@login_required
 def nova_competencia_view(request):
     if request.method == 'POST':
         form = CompetenciaForm(request.POST, request.FILES)
@@ -141,6 +147,7 @@ def nova_competencia_view(request):
 
     return render(request, 'criacao/nova_competencia.html', {'form': form})
 
+@login_required
 def editar_competencia_view(request, competencia_id):
     competencia = get_object_or_404(Competencia, id=competencia_id)
 
@@ -155,12 +162,13 @@ def editar_competencia_view(request, competencia_id):
 
     return render(request, 'criacao/editar_competencia.html', {'form': form, 'competencia': competencia})
 
+@login_required
 def apagar_competencia_view(request, competencia_id):
     competencia = get_object_or_404(Competencia, id=competencia_id)
     competencia.delete()
     return redirect('competencias')
 
-
+@login_required
 def nova_formacao_view(request):
     if request.method == 'POST':
         form = FormacaoForm(request.POST)
@@ -172,7 +180,7 @@ def nova_formacao_view(request):
 
     return render(request, 'criacao/nova_formacao.html', {'form': form})
 
-
+@login_required
 def editar_formacao_view(request, formacao_id):
     formacao = get_object_or_404(Formacao, id=formacao_id)
 
@@ -186,8 +194,36 @@ def editar_formacao_view(request, formacao_id):
 
     return render(request, 'criacao/editar_formacao.html', {'form': form, 'formacao': formacao})
 
-
+@login_required
 def apagar_formacao_view(request, formacao_id):
     formacao = get_object_or_404(Formacao, id=formacao_id)
     formacao.delete()
     return redirect('formacoes')
+
+
+def login_view(request):
+    if request.method == "POST":
+        user = authenticate(
+            request,
+            username=request.POST['username'],
+            password=request.POST['password']
+        )
+
+        if user:
+            login(request, user)
+            return redirect('home')
+        else:
+            return render(request, 'portfolio/login.html', {
+                'mensagem': 'Credenciais inválidas'
+            })
+
+    return render(request, 'portfolio/login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+def user_view(request):
+    return render(request, 'portfolio/user.html')

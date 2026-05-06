@@ -1,0 +1,16 @@
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Utilizador</h2>
+
+<section>
+    <article>
+        {% if request.user.is_authenticated %}
+            <p>Bem-vindo, {{ request.user.username }}</p>
+            <p>Email: {{ request.user.email }}</p>
+        {% else %}
+            <p>Não está autenticado.</p>
+        {% endif %}
+    </article>
+</section>
+{% endblock %}

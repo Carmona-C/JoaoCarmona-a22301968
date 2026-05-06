@@ -2,7 +2,9 @@
 
 {% block content %}
 <h2>Tecnologias</h2>
-<p> <a href="{% url 'nova_tecnologia' %}" class="btn-primary">+ Nova Tecnologia</a> </p>
+{% if request.user.is_authenticated %}
+    <p> <a href="{% url 'nova_tecnologia' %}" class="btn-primary">+ Nova Tecnologia</a> </p>
+{% endif %}
 <section>
     {% for tecnologia in tecnologias %}
     <article>
@@ -14,8 +16,10 @@
             </div>
 
             <div class="actions">
+            {% if request.user.is_authenticated %}
                 <a href="{% url 'editar_tecnologia' tecnologia.id %}" class="btn-edit">Editar</a>
                 <a href="{% url 'apagar_tecnologia' tecnologia.id %}" class="btn-danger">Apagar</a>
+            {% endif %}
             </div>
         </header>
         <section>
