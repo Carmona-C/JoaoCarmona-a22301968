@@ -75,14 +75,14 @@ class Projeto(models.Model):
 
 
 class TFC(models.Model):
-    titulo = models.CharField(max_length=200)
-    autor = models.CharField(max_length=150, blank=True)
-    orientador = models.CharField(max_length=150, blank=True)
-    licenciatura = models.CharField(max_length=150, blank=True)
+    titulo = models.CharField(max_length=300)
+    autor = models.CharField(max_length=300, blank=True)
+    orientador = models.CharField(max_length=300, blank=True)
+    licenciatura = models.CharField(max_length=300, blank=True)
     ano = models.IntegerField(null=True, blank=True)
     resumo = models.TextField(blank=True)
     palavras_chave = models.TextField(blank=True)
-    area_cientifica = models.CharField(max_length=150, blank=True)
+    area_cientifica = models.CharField(max_length=300, blank=True)
     pdf = models.URLField(blank=True)
     imagem = models.URLField(blank=True)
     email = models.EmailField(blank=True)

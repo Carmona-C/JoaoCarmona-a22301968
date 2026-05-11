@@ -29,8 +29,6 @@ urlpatterns = [
     path("portfolio/", include("portfolio.urls")), #  rota para app escola sem precisar de escrever "escola"
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 ## ficheiro projects/urls.py
 
